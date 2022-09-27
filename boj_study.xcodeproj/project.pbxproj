@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1497082528D6D5E400F351BF /* boj_15649.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1497082428D6D5E400F351BF /* boj_15649.cpp */; };
+		14D04D3D28E2DE9300ACAAA3 /* boj_1931.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14D04D3C28E2DE9300ACAAA3 /* boj_1931.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,8 +23,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1420094D2796987100A7BC6C /* boj_study */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = boj_study; sourceTree = BUILT_PRODUCTS_DIR; };
-		1497082428D6D5E400F351BF /* boj_15649.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = boj_15649.cpp; sourceTree = "<group>"; };
+		14D04D3928E2D50500ACAAA3 /* boj_study */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = boj_study; sourceTree = BUILT_PRODUCTS_DIR; };
+		14D04D3C28E2DE9300ACAAA3 /* boj_1931.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = boj_1931.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,22 +42,14 @@
 			isa = PBXGroup;
 			children = (
 				1420094F2796987100A7BC6C /* boj_study */,
-				1420094E2796987100A7BC6C /* Products */,
+				14D04D3928E2D50500ACAAA3 /* boj_study */,
 			);
-			sourceTree = "<group>";
-		};
-		1420094E2796987100A7BC6C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				1420094D2796987100A7BC6C /* boj_study */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		1420094F2796987100A7BC6C /* boj_study */ = {
 			isa = PBXGroup;
 			children = (
-				1497082428D6D5E400F351BF /* boj_15649.cpp */,
+				14D04D3C28E2DE9300ACAAA3 /* boj_1931.cpp */,
 			);
 			path = boj_study;
 			sourceTree = "<group>";
@@ -79,7 +71,7 @@
 			);
 			name = boj_study;
 			productName = boj_study;
-			productReference = 1420094D2796987100A7BC6C /* boj_study */;
+			productReference = 14D04D3928E2D50500ACAAA3 /* boj_study */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -104,7 +96,7 @@
 				Base,
 			);
 			mainGroup = 142009442796987100A7BC6C;
-			productRefGroup = 1420094E2796987100A7BC6C /* Products */;
+			productRefGroup = 142009442796987100A7BC6C;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -118,7 +110,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1497082528D6D5E400F351BF /* boj_15649.cpp in Sources */,
+				14D04D3D28E2DE9300ACAAA3 /* boj_1931.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
