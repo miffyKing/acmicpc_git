@@ -1,82 +1,82 @@
-#include<iostream>
-#include<string>
-#include <map>
-#include<set>
-#include<stack>
-#include<queue>
-#include <vector>
-#include <functional>
+#include <iostream>
 #include <algorithm>
-#include<cmath>
-#include <cstring>
-#include <set>
-#include <stdio.h>
+#include <vector>
+#include <stack>
+
 
 using namespace std;
 
+stack<int> buffer;
+long long answer = 0;
+
+void empty_stack()
+{
+    int n = (int)buffer.size();
+    while(n > 0)
+    {
+        answer -= buffer.top();
+        buffer.pop();
+        n--;
+    }
+}
 int main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-    
     string input;
-    int i;
-    long long tmp = 0;
-    long long ans = 0;
-    int flag_minus = 0;
+    vector<int> numbers;
+    int minus_flag = 0;
     cin>>input;
-    i = 0;
+    int tmp = 0;
     
-    while (input[i])
+    for(int i = 0; i< input.size(); i++)
     {
-        if (input[i] == '-')
+        if(input[i] == '-' || input[i] == '+')
         {
-            flag_minus = 1;
-        }
-        else if (input[i] == '+')
-        {
-           if (flag_minus == 1)
-           {
-               input[i] = '-';
-           }
-        }
-        i++;
-    }
-    i = 0;
-    int prev_booho = 0; //0이 +, 1이 -
-    while (input[i])
-    {
-        if (input[i] == '-')
-        {
-            if(prev_booho == 1)
-                ans -= tmp;
-            else
-                ans += tmp;
-            tmp = 0;
-            prev_booho = 1;
-        }
-        else if (input[i] == '+')
-        {
-            if(prev_booho == 1)
-                ans -= tmp;
-            else
-                ans += tmp;
-            tmp = 0;
-            prev_booho = 0;
+            if(input[i] == '-')
+            {
+                if(minus_flag == 0)
+                {
+                    answer += tmp;
+                    tmp  =0;
+                    minus_flag = 1;
+                }
+                else
+                {
+                    buffer.push(tmp);
+                    minus_flag = 1;
+                    empty_stack();
+                    tmp = 0;
+                }
+            }
+            else if (input[i] == '+')
+            {
+                if(minus_flag == 0)
+                {
+                    answer += tmp;
+                    tmp = 0;
+                }
+                else
+                {
+                    buffer.push(tmp);
+                    tmp = 0;
+                }
+            }
         }
         else
-        {
-            tmp *=10;
-            tmp += input[i] - '0';
-        }
-        i++;
+            tmp = 10*tmp + (input[i] - '0');
     }
-    if(prev_booho == 1)
-        ans -= tmp;
+    if(minus_flag == 1)
+    {
+        answer -= tmp;
+        empty_stack();
+    }
     else
-        ans += tmp;
-    cout<<ans;
-    return (0);
+    {
+        answer += tmp;
+        while(buffer.empty() != 1){
+            answer += buffer.top();
+            buffer.pop();
+        }
+    }
+    cout<<answer << '\n';
+    return 0;
 }
-

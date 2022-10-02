@@ -27,5 +27,5 @@ int main()
         idx = meetings[i].first;
     }
     cout<<cnt<<'\n';
-    return 0;
+   // return 0;
 }
