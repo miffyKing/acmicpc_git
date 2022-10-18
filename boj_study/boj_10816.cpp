@@ -1,103 +1,92 @@
-#include<iostream>
-#include<string>
-#include <map>
-#include<set>
-#include<stack>
-#include<queue>
-#include <vector>
-#include <functional>
+#include <iostream>
 #include <algorithm>
-#include<cmath>
-#include <cstring>
-#include <set>
-#include <stdio.h>
-//#include <string.h>
+#include <utility>
+#include <vector>
+#include <string>
+#include <stack>
+#include <queue>
+#include <deque>
+#include <list>
+#include <map>
 
 using namespace std;
 
-int n;
-int m;
-int card[500002];
-vector<int> find_card;
+#define ffor(i, x) for (int (i) = 0; (i) < (x) ; ++(i))
+#define fffor(i, x) for (int (i) = 1; (i) <= (x) ; ++(i))
+#define cc(x) cin >> (x); // ⭐️ stdin 인풋 하나 받기
+#define ccc(x) int (x); cin >> (x); // ⭐️ int 변수 만들고 그걸로 stdin 인풋 하나 받기
+#define coo(x) cout << x << '\n'; // ⭐️ 변수 출력하고 줄바꿈
+#define cob(x) cout << x << ' '; // ⭐️ 변수 출력하고 스페이스바
+#define ii pair<int, int> // ⭐️ 보통 vector랑 많이 쓴다
+#define ll long long
+int dx[] = {1, 0, -1, 0}; // 동 남 서 북 // ⭐️ DFS, BFS 문제 풀 때 꼭 씀
+int dy[] = {0, 1, 0, -1};
+int INF = 1e9 + 7;
 
-int lowerbound(int target, int size )
+int solution(int num, vector<int> v)
 {
-    int left = 0; int right  = size-1;
-    while(left< right)
-    {
-        int middle = (left+right)/2;
-        if(card[middle] >= target)
+    int   start = 0;
+    int end = (int)v.size() - 1;
+    int mid;
+    vector<int>::iterator cur = v.begin();
+    int sum = 0;
+    cout<<">>>>\n";
+    while(start <= end){
+        mid = (start + end) / 2;
+        cur += mid;
+        cout << "check:: start "<< start<< " mid " << mid << "end " << end<<'\n';;
+        if(v[mid] == num)
         {
-            right = middle;
+            sum++;
+            v.erase(cur);
+            v.shrink_to_fit();
         }
-        else
+        else if(v[mid] < num)
         {
-            left = middle +1;
+            start = mid + 1;
         }
-        
+        else if(v[mid] > num)
+        {
+            end = mid - 1;
+        }
     }
-    return right;
-}
-int upperbound(int target, int size)
-{
-    int left = 0;
-    int right = size-1;
-    while(left < right)
-    {
-        int middle = (left+right)/2;
-        if (card[middle] > target) {
-            right = middle;
-        }
-        else
-        {
-            left = middle+1;
-        }
-        
-    }
-    return left;
-    
+    cout<<">>>>\n";
+    return (sum);
 }
 
 int main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-    
- 
-    //long long int middle;
-    
-    cin>>n;
-    for(int i =0; i <n;i++)
-    {
-        cin>>card[i];
-    }
-    
-    cin>>m;
-    int tmp;
-    for(int i =0; i <m;i++)
-    {
-        cin>> tmp;
-        find_card.push_back(tmp);
-    }
-    
-    sort(card, card+n);
-    //sort(find_card, find_card+m);
-    
-    for(int i =0; i< m ;i++)
-    {
-        int target = find_card[i];
-        int lower_position;
-        int upper_position;
-        
-        lower_position = lowerbound(target, n);
-        upper_position = upperbound(target, n);
-        if(upper_position == n-1 && card[n-1] == find_card[i])
-            upper_position++;
-        cout<<upper_position - lower_position << ' ';
-    }
-   
+   ios_base::sync_with_stdio(false);
+   cin.tie(NULL);
+   cout.tie(NULL);
 
-
-    return 0;
+   ccc(N);
+   vector<int> a;
+   while (N--)
+   {
+       //int tmp;
+       ccc(tmp);
+       a.push_back(tmp);
+   }
+   ccc(M);
+   int M_mem = M;
+   vector<ii> b;
+    cout<<"!!!!!\n";
+   while (M--){
+      ii tmp;
+      cin >> tmp.first;
+      b.push_back(tmp);
+     //  cout<<tmp.first<<'\n';
+   }
+    
+     cout<<"!!!!!\n";
+   sort(a.begin(),a.end());
+    
+     cout<<"!!!!!\n";
+    
+   for (int i = 0; i < M_mem; i++){
+      b[i].second = solution(b[i].first, a);
+      cob(b[i].second);
+   }
+   return (0);
 }
