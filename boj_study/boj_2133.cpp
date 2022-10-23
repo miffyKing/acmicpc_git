@@ -1,47 +1,31 @@
-#include<iostream>
-#include<string>
-#include <map>
-#include<set>
-#include<stack>
+#include <iostream>
 #include <vector>
-#include <functional>
-#include <algorithm>
-#include<cmath>
-#include <cstring>
-#include <set>
-#include <stdio.h>
-//#include <string.h>
 
 using namespace std;
 
-int arr[32];
 int main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-    
     int n;
+    int array[32];
+    
     cin>>n;
+    array[1] = 0;
+    array[2] = 3;
+    array[3] = 0;
+    array[4] = 11;
     
     if(n%2 == 1)
     {
-        cout<<0;
+        cout<<0<<'\n';
         return 0;
     }
-    arr[0] =1;
-    arr[4] = 11;
-    arr[2] = 3;
-    
-    for(int i = 6; i<= n; i++)
+    for(int i = 6; i <= n; i+=2)
     {
-        arr[i] = arr[i-2]*3;
-        for(int j = 4; j<= i; j+=2)
-        {
-            arr[i] += arr[i-j]*2;
-        }
-        
+        array[i] = array[i-2] * 3;
+        for(int j= 2; j< i-2; j+=2)
+            array[i] += (array[j]*2);
+        array[i]+=2;
     }
-    cout<<arr[n];
+    cout<<array[n]<<'\n';
+    return 0;
 }
-
