@@ -6,9 +6,6 @@ public class Boj_2444 {
 
         int num = scanner.nextInt();
 
-
-
-
         for (int i = 0; i< num; i++)
         {
             for (int j = num - i-1; j > 0; j--)
