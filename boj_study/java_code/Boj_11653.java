@@ -18,8 +18,5 @@ public class Boj_11653 {
                 }
             }
         }
-
-
-
     }
 }
