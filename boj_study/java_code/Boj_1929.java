@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class Boj_1929 {
@@ -15,10 +18,15 @@ public class Boj_1929 {
             }
         }
         arr[1] = 1;
-        for (int i = m; i <= n; i++) {
-            if (arr[i] == 0) {
-                System.out.println(i);
-            }
-        }
+//        for (int i = m; i <= n; i++) {
+//            if (arr[i] == 0) {
+//                System.out.println(i);
+//            }
+//        }
+        Arrays.stream(arr)
+            .filter(x -> {
+                return (x == 0);
+            }).forEach(System.out::println);
+
     }
 }
