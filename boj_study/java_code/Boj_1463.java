@@ -21,14 +21,8 @@ public class Boj_1463 {
             }
             comp.add(table[i-1] + 1);
             Collections.sort(comp);
-//            for (int j = 0; j < comp.size(); j++) {
-//                System.out.print(comp.get(j) + " ");
-//            }
-//            System.out.println();
             table[i] = comp.get(0);
         }
-//        for (int i = 1; i <= X; i++) {
-            System.out.println(table[X]);
-//        }
+        System.out.println(table[X]);
     }
 }
