@@ -11,9 +11,16 @@ public class Boj_2078 {
         StringTokenizer st = new StringTokenizer(scanner.nextLine());
         a = Long.parseLong(st.nextToken());
         b = Long.parseLong(st.nextToken());
-        while (true) {
-
+        while (!(a == 1 && b == 1)) {
+            if (a < b) {
+                b -= a;
+                x++;
+            } else {
+                a -=b;
+                y++;
+            }
         }
+        System.out.println(y + " " + x);
 
     }
 }
