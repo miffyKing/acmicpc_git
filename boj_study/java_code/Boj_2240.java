@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-public class Boj_14501 {
+public class Boj_2240 {
 
     public static void main(String[] args) {
         int table[][][] = new int[3][1002][32];
