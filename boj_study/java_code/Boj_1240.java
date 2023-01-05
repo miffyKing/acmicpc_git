@@ -22,6 +22,7 @@ public class Boj_1240 {
             table.get(from).add(new Pair(to, length));
             table.get(to).add(new Pair(from, length));
         }
+
         for (int tc = 0; tc < m; tc++) {
             StringTokenizer st3 = new StringTokenizer(scanner.nextLine());
             int from = Integer.parseInt(st3.nextToken());
@@ -35,12 +36,10 @@ public class Boj_1240 {
             int total_leng = 0;
             while (!q.isEmpty()) {
                 int cur = q.peek(); q.remove();
-                //visited[cur] = 1;
                 for (int i = 0; i < table.get(cur).size(); i++) {
                     if (visited[table.get(cur).get(i).to] == 0) {
                         q.add(table.get(cur).get(i).to);
                         visited[table.get(cur).get(i).to] = visited[cur] + table.get(cur).get(i).length;
-                        //System.out.println(" table.get(cur).get(i).to  " + table.get(cur).get(i).to + "   " + visited[table.get(cur).get(i).to]);
                     }
                 }
             }
@@ -57,6 +56,5 @@ public class Boj_1240 {
             this.to = a;
             this.length = b;
         }
-
     }
 }
