@@ -53,6 +53,8 @@ public class Boj_1012 {
             System.out.println(cnt);
         }
 
+
+
     }
 
     public static class Pair {
