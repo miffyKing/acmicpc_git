@@ -32,9 +32,6 @@ public class Boj_1707 {
             int visited[] = new int[v+1];       //visited가 0이면 한번도 방문 안한거고, 1,2 를 왔다리 갔다리 하자.
             dfs_func(v,table, visited);
 
-            // 모든 정점에서 시작해 보았다.
-
-
         }
     }
 
