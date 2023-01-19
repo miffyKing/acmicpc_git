@@ -5,27 +5,30 @@
 using namespace std;
 
 int minfactor[5000001];
+vector<int> result;
+vector<int> sosu_list;
 
-vector<int> get_soinsoo(int tmp, vector<int> list)
+void get_soinsoo(int tmp)
 {
-    vector<int> result;
     while(tmp > 1)
     {
         result.push_back(minfactor[tmp]);
         tmp /= minfactor[tmp];
     }
-    return result;
 }
 
 
 
 int main()
 {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    
     int n;
     //vector<int> arr;
-    vector<int> sosu_list;
     
     
+    minfactor[0] = minfactor[1] = -1;
     for (int i = 2; i <= 5000000; i++)
     {
         minfactor[i] = i;
@@ -53,10 +56,11 @@ int main()
     {
         int tmp;
         cin>>tmp;
-        vector<int> ans = get_soinsoo(tmp, sosu_list);
-        for (int j = 0; j < ans.size(); j++)
+        result.clear();
+        get_soinsoo(tmp);
+        for (int j = 0; j < result.size(); j++)
         {
-            cout<< ans[j] << ' ';
+            cout<< result[j] << ' ';
         }
         cout<<'\n';
     }
