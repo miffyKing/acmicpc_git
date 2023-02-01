@@ -29,14 +29,19 @@ int main()
     
     for (int i = 2; i*i <= 1000000; i++)
     {
-        if (visited[i] == true)
-        {
-            sosu_list.push_back(i);
-        }
         for (int j = 2*i; j <= 1000000; j+=i)
         {
             visited[j] = false;
         }
+    }
+    
+    for (int i = 2; i<= 1000000; i++)
+    {
+        if (visited[i] == true)
+        {
+            sosu_list.push_back(i);
+        }
+
     }
     // 소수 구함.
     // 입력으로 받은 수들에 대해 소인수 분해를 하고,
