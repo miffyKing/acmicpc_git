@@ -19,6 +19,7 @@ int main()
     {
         cin>>tmp;
         if(tmp <= 0) minus.push_back(tmp);
+        
         else plus.push_back(tmp);
     }
     sort(plus.begin(), plus.end());
