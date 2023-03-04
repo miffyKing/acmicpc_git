@@ -4,124 +4,51 @@
 
 using namespace std;
 
-int visited[102][102];
-int width, height;
-vector<pair<int,int>> node[102][102];
-int answer = 0;
-void dfs_func(int x_cor, int y_cor, int cur_changed , int up_or_right);
+int dp[102][102][4];
 
 int main()
 {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    cout.tie(0);
+    int r, c;
+
+    cin>>c>>r;
     
-    
-    
-    cin>>width>>height;
-    
-    for(int i =1; i<= width; i++)
+    //[3][4] 에 도달하는 방법은 [3][3] 에서 , [2][4] 에서 두가지가 있는데, 
+    //이 [3][3] 이 [3][2] 에서 온 경우는 가능하고, [2][3] 에서 온 경우는 안됨
+    // 마찬가지로 [2][4] 는 [1][4] 는 가능하고 [2][3] 은 안된다.
+
+// 4가지 경우를 다 이용해보자.
+    // 아래 - 아래
+    // 오른 - 아래
+    // 오른 - 오른
+    // 아래 - 오른
+
+    int mod = 100000;
+    for (int i = 1; i <= r; i++)
     {
-        for(int j =1; j<= height; j++)
-        {
-            node[i][j].push_back(make_pair(i, j+1));
-            node[i][j].push_back(make_pair(i+1, j));
-            //[i][j+1].push_back(make_pair(i, j));
-            //node[i+1][j].push_back(make_pair(i,j));
-        }
+        dp[i][1][0] = 1;
     }
-    
-    
-    for(int i =1; i<= width; i++)
+    for (int i = 1; i <= c; i++)
     {
-        for(int j =1; j<= height; j++)
-        {
-            for(int k =0; k< node[i][j].size(); k++)
-            {
-                cout<<"i and j is " << i <<' ' << j << ' ' << node[i][j][k].first << ' ' << node[i][j][k].second << '\n';
-            }
-        }
+        dp[1][i][2] = 1;
     }
-    
-    dfs_func(1,1, 0, 0);
-    memset(visited, 0 , sizeof(visited));
-    cout<<"----------------\n";
-    dfs_func(1, 1, 0, 1);
-    //1,2번째 인자는 시작 좌표
-    //3번째 인자 -> 직전 방향전환 했으면 1, 아님 0
-    //4번째 인자 -> 직전 방향전환이 오른쪽이면 0, 위쪽이면 1
-    cout<< answer ;
-    
+    for (int i = 2; i<= r; i++)
+    {
+        for (int j = 2; j <= c; j++)
+        {
+            dp[i][j][0] = (dp[i-1][j][1] + dp[i-1][j][0]) % mod;
+            dp[i][j][1] = dp[i-1][j][2];
+
+            dp[i][j][2] = (dp[i][j-1][3] + dp[i][j-1][2]) % mod;
+            dp[i][j][3] = dp[i][j-1][0];
+        }
+        
+    }
+    int ans = 0;
+    for (int k = 0; k < 4; k++)
+    {
+        ans += dp[r][c][k];
+    }
+    cout<<ans % mod;
+
     return 0;
 }
-
-void dfs_func(int x_cor, int y_cor, int cur_changed , int up_or_right)
-{
-    
-    if(x_cor == width && y_cor == height)
-    {
-        cout<<"!!!!!\n";
-        answer++;
-        //return ;
-    }
-    for(int i =0; i< node[x_cor][y_cor].size(); i++)
-    {
-        int new_X = node[x_cor][y_cor][i].first;
-        int new_Y = node[x_cor][y_cor][i].second;       //새 xy 좌표
-        if(new_X > width || new_Y > height) continue;
-        if(up_or_right == 1 && cur_changed == 1) // 위로 이동중이고 직전에 방향전환을 함
-        {//그럼 지금 새 x,y 좌표가 오른쪽으로 가는거면 안되지
-            if(new_X > x_cor)
-            {
-                cout<<"CASE ERROR 1\n";
-                continue;
-            }
-            else
-            {
-                cout<< "CASE 1 x y : " <<new_X<< ' '<< new_Y << '\n';
-                dfs_func(new_X, new_Y, 0, 1);   //한칸 이동한거, 직전방향전환X, 위로
-            }
-        }
-        else if(up_or_right == 1 && cur_changed == 0) // 위로 이동중, 직전방향전환 X일 때
-        {// 위,오른쪽 어디든 갈 수 있으니 그냥 dfs
-            if(new_X > x_cor)   //오른쪽으로
-            {
-                cout<< "CASE 2 x y : " <<new_X<< ' '<< new_Y << '\n';
-                dfs_func(new_X, new_Y, 1, 0);
-            }
-            else
-            {
-                cout<< "CASE 3 x y : " <<new_X<<' '<<  new_Y << '\n';
-                dfs_func(new_X, new_Y, 0, 1);
-            }
-        }
-        if(up_or_right == 0 && cur_changed == 1) //오른쪽 이동중, 직전 방향전환 O
-        {
-            if(new_Y > y_cor)   //직전에 방향전환해서 오른쪽으로 가던걸 바로 위로?NO
-            {
-                cout<<"CASE ERROR 2\n";
-                continue;
-            }
-            else
-            {
-                cout<< "CASE 4 x y : " <<new_X<<' '<<  new_Y << '\n';
-                dfs_func(new_X, new_Y, 0,0);    //한칸 이동, 직.방.전 X, 오른쪽으로
-            }
-        }
-        else if(up_or_right == 0 && cur_changed == 0)    //오른쪽이동, 직.방.전 X
-        {// 위,오른쪽 어디든..
-            if(new_Y > y_cor)   //오른쪽으로..
-            {
-                cout<< "CASE 5 x y : " <<new_X<<' '<<  new_Y << '\n';
-                dfs_func(new_X, new_Y, 0, 0);       //직.방.전 X , 오른쪽
-            }
-            else
-            {
-                cout<< "CASE 6 x y : " <<new_X<<' '<<  new_Y << '\n';
-                dfs_func(new_X, new_Y, 1, 1);
-            }
-        }
-    }
-   // return ret ;
-}
-
