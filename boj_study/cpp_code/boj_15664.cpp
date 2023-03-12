@@ -4,57 +4,67 @@
 
 using namespace std;
 
-int cnt = 0;
 int n,m;
-int arr[10];
-int isused[10];
-int isused_num[10];
-int buffer[10];
+int isused[10002];
+int buffer[10002];
+vector<int> arr;
 
 void func(int cur)
 {
-    if (cur == m)
+    if(cur == m)
     {
-        for(int i =0; i< m; i++)
+        for (int i =0; i < m ; i++)
         {
-            cout<<buffer[i]<< ' ';
-        }
-        cout<<'\n';
-        return;
-    }
-  int before = 0;
-    for(int i = 0; i< n; i++)
+            cout<<buffer[i] << " ";
+        }cout<<"\n";
+        return ;
+    }   
+    int before= 0;
+    for (int i = 0; i < n; i++)
     {
-        if(before != arr[i])
+        if (cur != 0)
         {
-            buffer[cur] = arr[i];
-            before = buffer[cur];
-           // isused[i] = 1;
-            func(cur+1);
-            //isused[i] = 0;
-            //
-//            if (cur != 0 && buffer[cur-1] <= buffer[cur])
-//            {
-//                isused[i] = 1;
-//                func(cur+1);
-//                isused[i] = 0;
-//            }
-//            else if (cur == 0)
-//            {
-//                isused[i] = 1;
-//                func(cur+1);
-//                isused[i] = 0;
-//            }
+            if (isused[i] != 1 && before != arr[i])
+            {
+                if (buffer[cur-1] <= arr[i])
+                {
+                    isused[i] = 1;
+                    before = arr[i];
+                    buffer[cur] = arr[i];
+                    func(cur + 1);
+                    isused[i] = 0;
+                }
+            }
         }
+        else 
+        {
+            if (isused[i] != 1 && before != arr[i])
+            {
+                if (buffer[cur-1] <= arr[i])
+                {
+                    isused[i] = 1;
+                    before =arr[i];
+                    buffer[cur] = arr[i];
+                    func(cur + 1);
+                    isused[i] = 0;
+                }
+            }
+        }
+        
     }
 }
 
 int main()
 {
     cin>>n>>m;
-    for(int i =0; i< n; i++)
-        cin>>arr[i];
-    sort(arr, arr+n);
+    int tmp;
+    for(int i = 0; i < n; i++)
+    {  
+        cin>>tmp;
+        arr.push_back(tmp);
+    }
+    sort(arr.begin(), arr.end());
     func(0);
+
     return 0;
 }
