@@ -11,3 +11,4 @@ const n = BigInt(parseInt(input[1]));
 
 console.log((m/n).toString());
 console.log((m%n).toString());
+
