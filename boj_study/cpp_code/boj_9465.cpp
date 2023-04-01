@@ -22,7 +22,7 @@ int main()
             cin>>table[i][0];
         }
         for (int i = 0; i < n; i++)
-OAOAOA        {
+        {
             cin>>table[i][1];
         }
         dp[0][0] = table[0][0];
@@ -39,5 +39,4 @@ int main()
     }
     return 0;
 }
-
 

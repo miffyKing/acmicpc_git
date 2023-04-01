@@ -1,6 +1,7 @@
 {
-    "files.associations": {
-        "utility": "cpp"
-    },
-    "C_Cpp.errorSquiggles": "disabled"
+  "files.associations": {
+    "utility": "cpp",
+    "iostream": "cpp"
+  },
+  "C_Cpp.errorSquiggles": "disabled"
 }
