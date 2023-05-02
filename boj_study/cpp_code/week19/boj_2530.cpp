@@ -6,11 +6,11 @@ int main()
 {
   int a, b, c;
   int d;
-  cin>>a>>b>>c;
-  cin>>d;
+  cin >> a >> b >> c;
+  cin >> d;
 
-  int total = a*3600 + b*60 + c;
-  
+  int total = a * 3600 + b * 60 + c;
+
   total += d;
   int hour, min, sec;
   sec = total % 60;
@@ -20,6 +20,6 @@ int main()
   {
     hour %= 24;
   }
-  cout<<hour << ' ' << min << ' ' << sec << "\n";
+  cout << hour << ' ' << min << ' ' << sec << "\n";
   return 0;
 }
