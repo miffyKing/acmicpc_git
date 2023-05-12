@@ -4,7 +4,8 @@
     "iostream": "cpp",
     "vector": "cpp",
     "queue": "cpp",
-    "ios": "cpp"
+    "ios": "cpp",
+    "deque": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }
