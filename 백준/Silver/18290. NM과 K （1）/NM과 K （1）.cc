@@ -1,43 +1,61 @@
 #include <iostream>
+
 using namespace std;
 
-int n, m, k, maximum = -2147483648, num[10][10];
-bool visited[10][10] = { false, };
+int n,m,k;
+int isused[12][12];
+int arr[12][12];
+int lst[12];
+int ans = -2147483648;
 
-void go(int x, int y, int choice){
-    if (choice == k){
-        int sum = 0;
-        for(int i = 0; i < n; i++){
-            for(int j = 0; j < m; j++){
-                if (visited[i][j])
-                   sum += num[i][j]; 
-            }
-        }
-        maximum = max(maximum, sum);
-        return;
+void func(int row, int col, int lim)
+{
+  if (lim == k)
+  {
+    int sum = 0;
+    for (int i = 0; i < n; i++)
+    {
+      for (int j = 0; j < m; j++)
+      {
+        if (isused[i][j] == 1)
+          sum += arr[i][j];
+      }
     }
-    // 시간초과를 피하기 위해 i는 x부터 시작
-    for(int i = x; i < n; i++){
-        for(int j = 0; j < m; j++){
-            if (!visited[i][j]){
-               if (i >= 1 && visited[i - 1][j]) continue;
-               if (i < n - 1 && visited[i + 1][j]) continue;
-               if (j >= 1 && visited[i][j - 1]) continue;
-               if (j < m - 1 && visited[i][j + 1]) continue;
-               visited[i][j] = true;
-               go(i, j, choice + 1);
-               visited[i][j] = false;
-            }
-        }
+
+    ans = max(ans, sum);
+    return ;
+  }
+  for (int i =row; i < n; i++)
+  {
+    for (int j = 0; j < m; j++)
+    {
+      if (isused[i][j] == 0  )
+      {
+        if (i >= 1 && isused[i-1][j]) continue;
+        if (i < n -1 && isused[i+1][j]) continue;
+        if (j >= 1 && isused[i][j-1]) continue;
+        if (j < m -1 && isused[i][j+1]) continue;
+        isused[i][j] = 1;
+        func(i,j, lim+1);
+        isused[i][j] = 0;
+      }
     }
+  }
 }
 
-int main() {
-	ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
-    cin >> n >> m >> k;
-    for(int i = 0; i < n; i++)
-        for(int j = 0; j < m; j++)
-            cin >> num[i][j];
-    go(0, 0, 0);
-    cout << maximum;
+int main()
+{
+  cin>>n>>m>>k;
+  for (int i = 0; i < n; i++)
+  {
+    for (int j = 0; j < m; j++)
+    {
+      cin>>arr[i][j];
+    }
+  }
+
+  func(0,0, 0);
+
+  cout<<ans<<"\n";
+  return 0;
 }
