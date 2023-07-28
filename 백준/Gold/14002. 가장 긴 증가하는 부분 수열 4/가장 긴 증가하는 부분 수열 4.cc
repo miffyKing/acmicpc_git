@@ -32,9 +32,8 @@ int main()
         }
         else
         {
-          dp[i] = dp[j]+1;
-          
-          lst[i].clear();
+          dp[i] = dp[j]+1;        
+          //lst[i].clear();
           lst[i] = lst[j];
           lst[i].push_back(arr[i]);
         }
@@ -46,13 +45,8 @@ int main()
       max_idx = i;
     }
   }
-  cout<<max_val<<"\n";
 
-  // if(lst[max_idx].size() == 0)
-  // {
-  //   cout<<arr[max_idx]<<"\n";
-  //   return 0;
-  // }
+  cout<<max_val<<"\n";
   for (int i  =0 ; i < lst[max_idx].size(); i++)
   {
     cout<<lst[max_idx][i] << " ";
