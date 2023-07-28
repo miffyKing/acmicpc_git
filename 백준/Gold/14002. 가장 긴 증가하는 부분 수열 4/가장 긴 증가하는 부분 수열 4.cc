@@ -17,7 +17,7 @@ int main()
   {
     cin>>arr[i];
   }
-  //lst[0].push_back(arr[0]);
+  
   for (int i = 0; i < n; i++)
   {
     dp[i] = 1;
@@ -36,18 +36,9 @@ int main()
           
           lst[i].clear();
           lst[i] = lst[j];
-          // for(int k = 0; k < lst[j].size(); k++)
-          // {
-          //   lst[i].push_back(lst[j][k]);
-          // }
           lst[i].push_back(arr[i]);
         }
       }
-      // cout<< "i is  " << i << "and current lst is ...\n" ;
-      // for(int idx = 0; idx < lst[i].size(); idx++)
-      // {
-      //   cout<<lst[i][idx] << " ";
-      // } cout<<"\n";
     }
     max_val = max(max_val, dp[i]);
     if(max_val == dp[i])
@@ -57,12 +48,11 @@ int main()
   }
   cout<<max_val<<"\n";
 
-  //cout<<"max idx is " << max_idx<<"\n";  
-  if(lst[max_idx].size() == 0)
-  {
-    cout<<arr[max_idx]<<"\n";
-    return 0;
-  }
+  // if(lst[max_idx].size() == 0)
+  // {
+  //   cout<<arr[max_idx]<<"\n";
+  //   return 0;
+  // }
   for (int i  =0 ; i < lst[max_idx].size(); i++)
   {
     cout<<lst[max_idx][i] << " ";
