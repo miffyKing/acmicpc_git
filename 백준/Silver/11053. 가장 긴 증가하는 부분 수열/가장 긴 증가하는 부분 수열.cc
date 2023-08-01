@@ -1,33 +1,37 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
+#include <math.h>
 
 using namespace std;
 
-int arr[1002];
 int dp[1002];
 
 int main()
 {
   int n;
-  int maxval = -1;
-  cin>>n;
-  for (int i = 0; i< n; i++)
+  int arr[1002];
+
+  cin >> n;
+
+  for (int i = 0; i < n; i++)
   {
-    cin>>arr[i];
+    cin >> arr[i];
   }
+
+  int ans = -1;
+  dp[0] = 1;
+
   for (int i = 0; i < n; i++)
   {
     dp[i] = 1;
     for (int j = 0; j < i; j++)
     {
-      if (arr[i] > arr[j] )
+      if (arr[j] < arr[i] && dp[i] <= dp[j])
       {
-        dp[i] = max(dp[i], dp[j]+1);
+        dp[i] = dp[j] + 1;
       }
     }
-    maxval = max(dp[i], maxval);
+    ans = max(ans, dp[i]);
   }
-  cout<<maxval<<"\n";
+  cout << ans << "\n";
   return 0;
 }
