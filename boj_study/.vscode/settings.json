@@ -8,7 +8,11 @@
     "deque": "cpp",
     "map": "cpp",
     "set": "cpp",
-    "numbers": "cpp"
+    "numbers": "cpp",
+    "numeric": "cpp",
+    "__split_buffer": "cpp",
+    "list": "cpp",
+    "string": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }
