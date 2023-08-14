@@ -13,7 +13,7 @@ int ans = -1;
 int get_diff()
 {
   int sum1 = 0;
-  for (int i = 1; i < n; i++)
+  for (int i = 0; i < n-1; i++)
   {
     sum1 += abs(lst[i] - lst[i + 1]);
   }
@@ -23,14 +23,14 @@ int get_diff()
 void func(int cur)
 {
 
-  if (cur == n + 1)
+  if (cur == n )
   {
     int sum2 = get_diff();
     ans = max(sum2, ans);
     return;
   }
 
-  for (int i = 1; i <= n; i++)
+  for (int i = 0; i < n; i++)
   {
     if (isused[i] == 0)
     {
@@ -46,12 +46,12 @@ void func(int cur)
 int main()
 {
   cin >> n;
-  for (int i = 1; i <= n; i++)
+  for (int i = 0; i < n; i++)
   {
     cin >> arr[i];
   }
 
-  func(1);
+  func(0);
   cout << ans << "\n";
   return 0;
 }
