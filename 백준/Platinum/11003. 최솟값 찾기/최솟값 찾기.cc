@@ -1,37 +1,38 @@
 #include <iostream>
 #include <deque>
 #include <vector>
+#include <utility>
 
-struct Node {
-    int index;
-    int value;
+using namespace std;
 
-    Node(int index, int value) : index(index), value(value) {}
-};
+// 5000000개 입력에 대한 크기 D부분문자열 찾고, 그 중 최솟값 찾기
+// n x nlogn(정렬)  시간초과 난당
+// 슬라이딩 윈도우 사용
 
-int main() {
-    std::ios_base::sync_with_stdio(false);
-    std::cin.tie(nullptr);
+int n, l;
+deque<pair<int,int> > dq;
+int A[5000001];
+vector<pair<int, int> > node;
 
-    int n, l;
-    std::cin >> n >> l;
+int main()
+{
+  std::ios_base::sync_with_stdio(false);
+  std::cin.tie(nullptr);
+  
+  cin>>n>>l;
+  for (int i = 0; i < n; i++)
+  {
+    cin>>A[i];
+    while(!dq.empty() && dq.back().second > A[i])  //디큐 젤 뒤에 수를 현재 입력값과 비교해 더 값이 크면 팝해버린다.
+      dq.pop_back();
+    dq.push_back(make_pair(i, A[i]));
 
-    std::deque<Node> deque;
+    if (!dq.empty() && ( i - dq.front().first) >= l)
+      dq.pop_front();
+    cout<<dq.front().second<<" ";
+  }
 
-    for (int idx = 1; idx <= n; idx++) {
-        int value;
-        std::cin >> value;
 
-        while (!deque.empty() && deque.back().value > value) {
-            deque.pop_back();
-        }
-        deque.push_back(Node(idx, value));
-        if (!deque.empty() && (idx - deque.front().index) >= l) {
-            deque.pop_front();
-        }
+  
 
-        std::cout << deque.front().value << " ";
-    }
-
-    return 0;
 }
