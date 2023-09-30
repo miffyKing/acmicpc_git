@@ -1,47 +1,40 @@
 #include <iostream>
 #include <vector>
+#include <queue>
+#include <algorithm>
 
 using namespace std;
 
-int visited[1002];
-vector<int> relation[1002];
+int n, m;
+vector<int> adj[1002];
 
-void dfs(int idx)
-{
-  visited[idx] = 1;
-  for(int i = 0; i < (int)relation[idx].size(); i++)
-  {
-    if(visited[relation[idx][i]] == 0)
-    {
-      dfs(relation[idx][i]);
+bool visited[1002];
+void dfs(int now) {
+    visited[now] = 1;
+    for (int i = 0; i < (int)adj[now].size(); i++){
+        int next = adj[now][i];
+        if (!visited[next]) dfs(next);
     }
-  }
-
 }
 
 int main()
 {
-  int n, m,   a, b;
-  cin>>n>>m;
-
-  for(int i = 0; i < m ; i++)
-  {
-    cin>>a>>b;
-    relation[a].push_back(b);
-    relation[b].push_back(a);
-  }
-
-  int cnt = 0;
-
-  for (int i = 1; i <= n; i++)
-  {
-    if(visited[i] == 0)
-    {
-     //cout<<"i is  " << i << "\n";
-      cnt++;
-      dfs(i);
+    cin >> n >> m;
+    for (int i = 0; i < m; i++) {
+        int x, y;
+        cin >> x >> y;
+        adj[x].push_back(y);
+        adj[y].push_back(x);
     }
-  }
-  cout<<cnt<<"\n";
-  return 0;
+    for (int j = 1; j <= n; j++) {
+        sort(adj[j].begin(), adj[j].end());
+    }
+    
+    int cnt = 0;
+    for (int k = 1; k <= n; k++) {
+        if (visited[k]) continue;
+        dfs(k);
+        cnt++;
+    }
+    cout << cnt;
 }
